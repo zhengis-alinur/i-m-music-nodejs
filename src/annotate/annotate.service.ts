@@ -9,7 +9,7 @@ export class AnnotateService {
 
   constructor(private configService: ConfigService) {
     this.openai = new OpenAI({
-      apiKey: this.configService.get<string>('OPENAI_API_KEY'),
+      apiKey: this.configService.get<string>('openAI'),
     });
   }
 

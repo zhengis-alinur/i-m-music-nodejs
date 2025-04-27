@@ -9,7 +9,7 @@ import { SearchModule } from './search/search.module';
 import { AnnotateModule } from './annotate/annotate.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ChartsModule } from './charts/charts.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 
 @Module({
@@ -19,7 +19,13 @@ import configuration from './config/configuration';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/music_db'),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('mongoDb'),
+      }),
+    }),
     ArtistsModule,
     AlbumsModule,
     SongsModule,
