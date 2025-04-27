@@ -26,12 +26,16 @@ export class SongsService {
 
     if (!song) return;
 
-    const artistName = await this.artistsService.findOne(
+    const artist = await this.artistsService.findOne(
       song?.artist_id.toString(),
     );
     const lyrics = await this.lyricsService.getLyrics(id);
 
-    return { ...song.toObject(), artistName, lyrics: lyrics?.lyrics };
+    return {
+      ...song.toObject(),
+      artistName: artist?.name,
+      lyrics: lyrics?.lyrics,
+    };
   }
 
   findByAlbum(albumId: string) {
