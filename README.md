@@ -1,98 +1,76 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# i-am-music
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**i-am-music** is a web application that allows users to provide annotations and interpretations of song lyrics, as well as explore information about albums, songs, and artists. The project leverages AI capabilities to analyze lyrics and generate detailed line-by-line annotations, helping users dive deeper into the hidden meanings behind the songs.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+- **Backend**: Nest.js
+- **Database**: MongoDB
+- **Frontend**: React.js
+- **Lyrics/API Sources**: Genius API
+- **AI for annotations**: OpenAI API
+- **Deployment**: Vercel (frontend), Railway.com(backend)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Installation and Launch Instructions
 
-## Project setup
+### 1. Clone the repository:
 
 ```bash
-$ npm install
+git clone https://github.com/yourusername/i-am-music.git
 ```
 
-## Compile and run the project
+### 2. Set up the Backend (Nest.js):
+
+- Navigate to the frontend folder:
+
+- Install dependencies:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+pnpm i
 ```
 
-## Run tests
+- Start the frontend:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+pnpm start:dev
 ```
 
-## Deployment
+Your application will now be available at `http://localhost:5173`.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Design and Development Process
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+During the planning phase, I spent significant time choosing the best data sources for song information and lyrics.  
+Ultimately, I decided to use two sources:
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+1. **Genius API** — One of the most popular databases for lyrics and artist information.
+2. A second lyrics source, to complement the data.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+I wrote a Python script to scrape and gather the data, then uploaded it into MongoDB.  
+I chose this approach to ensure faster data access and avoid relying on external APIs during runtime, considering this is a pet project.
 
-## Resources
+## Unique Approaches and Methodologies
 
-Check out a few resources that may come in handy when working with NestJS:
+- **MongoDB storage**: Storing all lyrics and metadata in MongoDB provides flexibility and speeds up API responses.
+- **OpenAI API integration**: Instead of manually writing annotations, I integrated OpenAI's API to automatically generate high-quality line-by-line interpretations.
+- **Separated Backend and Frontend**: Keeping them in separate repositories allowed for better scalability, modularity, and easier deployments.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Trade-offs Made During Development
 
-## Support
+- **Storing data in own database**: Instead of dynamically fetching from APIs at runtime, I chose to pre-load lyrics into the database for speed and simplicity, accepting that the database might get outdated over time.
+- **Using OpenAI for interpretations**: While creating a custom NLP model could provide more control, OpenAI’s API offered a faster and more efficient solution for generating meaningful annotations within the limited time.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Known Issues and Problems
 
-## Stay in touch
+- Sometimes AI-generated annotations might be too generic or slightly off-topic depending on the input.
+- Under high load, some synchronization issues between the backend and frontend might occur since caching has not been fully implemented yet.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Why This Tech Stack?
 
-## License
+- **Nest.js**: Chosen for its structure, scalability, and powerful TypeScript support, ideal for building a robust backend API.
+- **MongoDB**: Flexible, easy to scale, and a great fit for storing varying song/artist data structures.
+- **React.js**: Allows building interactive, dynamic user interfaces quickly with efficient state management.
+- **OpenAI API**: Provides high-quality NLP capabilities out of the box, enabling fast development of the lyric annotation feature without needing to build custom models.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Video Demo
+
+[Link to video demo](https://your-video-link.com)

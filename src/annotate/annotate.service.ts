@@ -13,13 +13,22 @@ export class AnnotateService {
     });
   }
 
-  async annotate(input: AnnotateDto): Promise<string> {
+  getPrompt(input: AnnotateDto) {
     const { artist, song, line } = input;
 
-    const prompt = `Song: "${song}" by ${artist}\nLine: "${line}"\n\nExplain the meaning of this line in simple words. In russian.`;
+    const prompt = `Song: "${song}" by ${artist}
+    Line: "${line}"
+    
+    Explain the meaning of this line in simple words.`;
+
+    return prompt;
+  }
+
+  async annotate(input: AnnotateDto): Promise<string> {
+    const prompt = this.getPrompt(input);
 
     const response = await this.openai.chat.completions.create({
-      model: 'gpt-3.5-turbo', // Используйте 'gpt-4' при наличии доступа
+      model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
