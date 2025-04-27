@@ -2,6 +2,10 @@
 
 **i-am-music** is a web application that allows users to provide annotations and interpretations of song lyrics, as well as explore information about albums, songs, and artists. The project leverages AI capabilities to analyze lyrics and generate detailed line-by-line annotations, helping users dive deeper into the hidden meanings behind the songs.
 
+[Frontend Github](https://github.com/zhengis-alinur/i-m-music)
+
+[Frontend Deploy](https://i-m-music.vercel.app)
+
 ## Tech Stack
 
 - **Backend**: Nest.js
@@ -21,7 +25,7 @@ git clone https://github.com/yourusername/i-am-music.git
 
 ### 2. Set up the Backend (Nest.js):
 
-- Navigate to the frontend folder:
+- Navigate to the root folder:
 
 - Install dependencies:
 
