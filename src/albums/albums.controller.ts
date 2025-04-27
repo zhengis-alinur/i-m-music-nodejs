@@ -16,7 +16,7 @@ export class AlbumsController {
   }
 
   @Get('/artist/:artistId')
-  findByArtist(@Param('artistId') artistId: string) {
+  async findByArtist(@Param('artistId') artistId: string) {
     return this.albumsService.findByArtist(artistId);
   }
 }

@@ -11,6 +11,10 @@ export class ArtistsService {
     return this.model.find();
   }
 
+  async bests() {
+    return this.model.find().sort({ followers_count: -1 }).limit(10);
+  }
+
   findOne(id: string) {
     return this.model.findById(id);
   }

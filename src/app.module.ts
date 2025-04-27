@@ -9,9 +9,16 @@ import { SearchModule } from './search/search.module';
 import { AnnotateModule } from './annotate/annotate.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ChartsModule } from './charts/charts.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     MongooseModule.forRoot('mongodb://localhost:27017/music_db'),
     ArtistsModule,
     AlbumsModule,

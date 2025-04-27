@@ -19,4 +19,9 @@ export class SongsController {
   findByAlbum(@Param('albumId') albumId: string) {
     return this.songsService.findByAlbum(albumId);
   }
+
+  @Get('/artist/:artistId')
+  findByArtist(@Param('artistId') artistId: string) {
+    return this.songsService.findByArtist(artistId);
+  }
 }

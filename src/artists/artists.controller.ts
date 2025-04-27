@@ -10,6 +10,11 @@ export class ArtistsController {
     return this.artistsService.findAll();
   }
 
+  @Get('bests')
+  bests() {
+    return this.artistsService.bests();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.artistsService.findOne(id);
